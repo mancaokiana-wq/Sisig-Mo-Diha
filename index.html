@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sisig Mo Diha — Sizzling Sisig House | Lami Gyud!</title>
+<meta name="description" content="Sisig Mo Diha — Cebu's hottest sizzling sisig. Crispy pork, chicken, tuna & unli rice. Promo bundles powered by Python (PyScript). Order now!" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg-fx" aria-hidden="true"><span class="ember e1"></span><span class="ember e2"></span><span class="ember e3"></span><span class="ember e4"></span><span class="ember e5"></span><span class="ember e6"></span></div>
+
+<div class="topbar">🔥 GRAND OPENING — 20% OFF Barkada Bundles with code <button class="code" id="copyCode" title="Click to copy">DIHA20</button> • Free delivery over ₱499 🛵 • 🐍 Powered by PyScript</div>
+
+<!-- HEADER: LOGO TOP LEFT -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#home" class="logo" aria-label="Sisig Mo Diha home">
+      <span class="logo-badge">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22.5" fill="#E10600" stroke="#fff" stroke-width="2.5"/>
+          <ellipse cx="24" cy="29" rx="11" ry="6.5" fill="#111"/>
+          <ellipse cx="24" cy="27.5" rx="11" ry="6.5" fill="#2b2b2b"/>
+          <circle cx="20" cy="26" r="2.2" fill="#FFB800"/>
+          <circle cx="24.5" cy="27.5" r="2.2" fill="#FFB800"/>
+          <circle cx="28" cy="25.5" r="1.8" fill="#ff6b35"/>
+          <path d="M24 6c1.6 5.5-5.5 8-5.5 13a5.5 5.5 0 0 0 11 0c0-2.6-1.4-3.9-1.4-3.9s4 1.6 4 6a7.1 7.1 0 0 1-14.2 0C17.9 13.6 24 12.4 24 6Z" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="logo-text">SISIG <em>MO DIHA</em><small>★ SIZZLING HOUSE ★</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#promos">Promos</a>
+      <a href="#menu">Menu</a>
+      <a href="#why">Why Us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">🛒 <span id="cartCount">0</span></button>
+      <a href="#menu" class="btn btn-fire btn-sm">Order Now</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-left reveal">
+      <div class="hero-badges">
+        <span class="hot-pill"><span class="live-dot"></span> Open Now • 10AM – 10PM</span>
+        <span class="hot-pill gold">⭐ 4.9 — 2,300+ suki reviews</span>
+      </div>
+      <h1>SISIG<br><span class="red-stroke">MO DIHA!</span></h1>
+      <p class="tagline">SERVE DAYON. KAON DAYON. <span>BUSOG DAYON.</span></p>
+      <p class="subtitle">Crispy pork maskara on a screaming-hot cast-iron plate — molten egg, calamansi, red onion & secret halang sauce. <strong>Lami gyud, diha gyud!</strong></p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-fire btn-lg">🔥 Order — from ₱99</a>
+        <a href="#promos" class="btn btn-ghost">🎁 View Promos</a>
+      </div>
+      <div class="trust-row">
+        <div class="avatars"><span>JM</span><span>RK</span><span>AL</span><span>+</span></div>
+        <p><strong>2,300+ happy suki</strong> in Cebu • 🛵 25-min avg delivery</p>
+      </div>
+    </div>
+    <div class="hero-right reveal delay">
+      <div class="plate-wrap">
+        <div class="plate-glow"></div>
+        <div class="plate">
+          <div class="steam"><span></span><span></span><span></span><span></span></div>
+          <div class="plate-emoji">🍳</div>
+          <div class="sizzle">SSSZZZ… 🔥</div>
+        </div>
+        <div class="float-card fc1">🔥 Best Seller<strong>Classic Pork — ₱149</strong><small>⭐ 4.9 • 800+ orders</small></div>
+        <div class="float-card fc2">🎁 Code <strong>DIHA20</strong> — 20% OFF</div>
+        <div class="float-card fc3">🍚 Unli Rice <strong>+₱40 lang!</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="container marquee-wrap">
+    <div class="marquee"><div class="marquee-track">
+      <span>CRISPY SISIG</span><i>🔥</i><span>SIZZLING HOT</span><i>🔥</i><span>UNLI RICE</span><i>🔥</i><span>SISIG MO DIHA</span><i>🔥</i><span>FREE DELIVERY OVER ₱499</span><i>🔥</i>
+      <span>CRISPY SISIG</span><i>🔥</i><span>SIZZLING HOT</span><i>🔥</i><span>UNLI RICE</span><i>🔥</i><span>SISIG MO DIHA</span><i>🔥</i><span>FREE DELIVERY OVER ₱499</span><i>🔥</i>
+    </div></div>
+  </div>
+</section>
+
+<!-- PROMOS -->
+<section id="promos" class="section promos">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-tag">🎁 Limited Promos</p>
+      <h2>DEAL NGA <span class="red">DI GYUD MA-AWAT.</span></h2>
+      <p class="sec-sub">Tap "Claim" — the cart & totals are computed in Python. Hurry, promo ends soon!</p>
+    </div>
+    <div class="countdown reveal">⏳ Promo ends in <strong><span id="cdH">00</span>:<span id="cdM">00</span>:<span id="cdS">00</span></strong> <small id="cdNote">(Python timer 🐍)</small></div>
+    <div class="promo-grid">
+      <article class="promo-card featured reveal">
+        <span class="off">-20%</span>
+        <p class="p-tag">🔥 MOST AVAILED</p>
+        <h3>Barkada Blowout</h3>
+        <p>Any 2 sizzling sisig + rice platter + 4 drinks. Good for 4–5 pax.</p>
+        <div class="p-price"><strong>₱499</strong> <s>₱640</s> <span>Code: DIHA20</span></div>
+        <button class="btn btn-fire btn-sm add" data-name="Barkada Blowout (DIHA20)" data-price="499">Claim Deal +</button>
+      </article>
+      <article class="promo-card reveal">
+        <span class="off">-24%</span>
+        <p class="p-tag">☀️ LUNCH RUSH 11AM–2PM</p>
+        <h3>Sisig + Rice + Drink</h3>
+        <p>Classic pork sisig meal with iced tea. Weekdays, dine-in & takeout.</p>
+        <div class="p-price"><strong>₱129</strong> <s>₱170</s></div>
+        <button class="btn btn-fire btn-sm add" data-name="Lunch Rush Combo" data-price="129">Claim Deal +</button>
+      </article>
+      <article class="promo-card reveal">
+        <span class="off">FREE</span>
+        <p class="p-tag">🛵 DELIVERY DEAL</p>
+        <h3>Free Delivery + Free Egg</h3>
+        <p>Orders over ₱499 get free delivery + free extra egg per plate.</p>
+        <div class="p-price"><strong>₱0 fee</strong> <s>₱60</s> <span>Min. ₱499</span></div>
+        <a href="#menu" class="btn btn-ghost btn-sm">Order ₱499+ →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="section">
+  <div class="container">
+    <div class="sec-head split reveal">
+      <div><p class="sec-tag">🔥 Best Sellers — filtered by Python</p><h2>PILI NA, <span class="red">KAON NA!</span></h2></div>
+      <div class="menu-note">🍚 Unli rice +₱40 • 🥚 Extra egg +₱20 • 🌶️ Extra spicy +₱10</div>
+    </div>
+    <div class="filter-row reveal">
+      <button class="filter active" data-f="all">All</button>
+      <button class="filter" data-f="best">⭐ Best Sellers</button>
+      <button class="filter" data-f="pork">Pork</button>
+      <button class="filter" data-f="chicken">Chicken</button>
+      <button class="filter" data-f="seafood">Seafood</button>
+      <button class="filter" data-f="veggie">Veggie</button>
+    </div>
+    <div class="menu-grid" id="menuGrid">
+      <article class="dish reveal" data-cat="best pork"><div class="dish-top"><span class="dish-emoji">🐷</span><span class="badge-hot">🔥 BEST SELLER</span></div><h3>Classic Pork Sisig</h3><p>Crispy maskara, egg, calamansi. Ang original legend.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(812)</small></div><div class="dish-foot"><strong class="price">₱149</strong><button class="btn btn-fire btn-sm add" data-name="Classic Pork Sisig" data-price="149">Add +</button></div></article>
+      <article class="dish reveal" data-cat="best chicken"><div class="dish-top"><span class="dish-emoji">🍗</span><span class="badge-hot">🔥 BEST SELLER</span></div><h3>Chicken Sisig</h3><p>Grilled chicken, lighter pero crispy gihapon.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(640)</small></div><div class="dish-foot"><strong class="price">₱139</strong><button class="btn btn-fire btn-sm add" data-name="Chicken Sisig" data-price="139">Add +</button></div></article>
+      <article class="dish reveal" data-cat="best seafood"><div class="dish-top"><span class="dish-emoji">🐟</span><span class="badge-new">⭐ NEW</span></div><h3>Tuna Sisig</h3><p>Flaky tuna, creamy kick, sili heat.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(418)</small></div><div class="dish-foot"><strong class="price">₱159</strong><button class="btn btn-fire btn-sm add" data-name="Tuna Sisig" data-price="159">Add +</button></div></article>
+      <article class="dish reveal" data-cat="pork"><div class="dish-top"><span class="dish-emoji">🥓</span><span class="badge-spicy">🌶 EXTRA HOT</span></div><h3>Spicy Lechon Sisig</h3><p>Lechon kawali, labuyo glaze. Pang-isog!</p><div class="stars">⭐⭐⭐⭐☆ <small>(355)</small></div><div class="dish-foot"><strong class="price">₱179</strong><button class="btn btn-fire btn-sm add" data-name="Spicy Lechon Sisig" data-price="179">Add +</button></div></article>
+      <article class="dish reveal" data-cat="seafood"><div class="dish-top"><span class="dish-emoji">🐠</span><span class="badge-spicy">🌶 SPICY</span></div><h3>Bangus Sisig</h3><p>Boneless bangus, crispy garlic, suka dip.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(290)</small></div><div class="dish-foot"><strong class="price">₱159</strong><button class="btn btn-fire btn-sm add" data-name="Bangus Sisig" data-price="159">Add +</button></div></article>
+      <article class="dish reveal" data-cat="veggie"><div class="dish-top"><span class="dish-emoji">🌱</span><span class="badge-veg">🌱 VEGGIE</span></div><h3>Tofu & Mushroom Sisig</h3><p>Crispy tofu + mushroom, same sizzle.</p><div class="stars">⭐⭐⭐⭐☆ <small>(210)</small></div><div class="dish-foot"><strong class="price">₱119</strong><button class="btn btn-fire btn-sm add" data-name="Tofu Mushroom Sisig" data-price="119">Add +</button></div></article>
+      <article class="dish reveal" data-cat="best pork"><div class="dish-top"><span class="dish-emoji">🧀</span><span class="badge-hot">🧀 CHEESY</span></div><h3>Cheesy Overload</h3><p>Classic sisig drowned in cheese + fries.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(502)</small></div><div class="dish-foot"><strong class="price">₱189</strong><button class="btn btn-fire btn-sm add" data-name="Cheesy Overload Sisig" data-price="189">Add +</button></div></article>
+      <article class="dish reveal" data-cat="chicken pork"><div class="dish-top"><span class="dish-emoji">🍚</span><span class="badge-hot">🔥 SULIT ₱99</span></div><h3>Sisig Fried Rice Meal</h3><p>Sisig bits in garlic rice + egg + sabaw.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(731)</small></div><div class="dish-foot"><strong class="price">₱99</strong><button class="btn btn-fire btn-sm add" data-name="Sisig Fried Rice Meal" data-price="99">Add +</button></div></article>
+      <article class="dish reveal" data-cat="best pork chicken seafood"><div class="dish-top"><span class="dish-emoji">🎉</span><span class="badge-hot">🎉 BARKADA</span></div><h3>Barkada Platter</h3><p>Good for 4–5: 2 sisig + rice + drinks.</p><div class="stars">⭐⭐⭐⭐⭐ <small>(389)</small></div><div class="dish-foot"><strong class="price">₱499</strong><button class="btn btn-fire btn-sm add" data-name="Barkada Platter" data-price="499">Add +</button></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="section why">
+  <div class="container">
+    <div class="sec-head reveal"><p class="sec-tag">💯 Ang Diha Difference</p><h2>NGANO <span class="red">DIHA GYUD?</span></h2></div>
+    <div class="steps">
+      <div class="step reveal"><span class="step-n">1</span><h3>Pili</h3><p>Choose sisig + spice + add-ons.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step reveal"><span class="step-n">2</span><h3>Luto</h3><p>Fired on 200°C iron — 15 mins or less.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step reveal"><span class="step-n">3</span><h3>Sizzle</h3><p>Served mu-asu pa. Mix, then kaon!</p></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><span class="w-ico">🔥</span><h3>Always Sizzling</h3><p>200°C cast-iron. Mu-asu pa pag-abot.</p></div>
+      <div class="why-card reveal"><span class="w-ico">🤫</span><h3>Secret Sauce</h3><p>Lola's recipe + modern twist.</p></div>
+      <div class="why-card reveal"><span class="w-ico">🍚</span><h3>Unli Rice +₱40</h3><p>Kan-on is life. Eat big.</p></div>
+      <div class="why-card reveal"><span class="w-ico">⚡</span><h3>Hot in 15 Min</h3><p>Or free calamansi juice!</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section">
+  <div class="container">
+    <div class="sec-head split reveal">
+      <div><p class="sec-tag">⭐ Suki Love</p><h2>GISYAGITAN <span class="red">SA KALAMI.</span></h2></div>
+      <div class="rating-big">4.9★ <small>2,300+ reviews</small></div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Grabe kalami! Crispy jud, sizzling pa pag-serve. Balik-balikan every Friday!"</p><div class="rev-who"><span class="rav">JM</span><div><strong>Jessa M.</strong><small>Lahug, Cebu • Barkada Platter</small></div></div></div>
+      <div class="rev reveal"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Best tuna sisig in Cebu. Creamy, halang gamay. Delivery fast pa!"</p><div class="rev-who"><span class="rav">RK</span><div><strong>Rico K.</strong><small>Mandaue • Tuna Sisig</small></div></div></div>
+      <div class="rev reveal"><div class="stars">⭐⭐⭐⭐⭐</div><p>"Used DIHA20 — sulit kaayo! Pang family, pang inom, pang tanan."</p><div class="rev-who"><span class="rav">AL</span><div><strong>Aya L.</strong><small>Lapu-Lapu • Barkada Blowout</small></div></div></div>
+    </div>
+    <div class="cta-banner reveal">
+      <div><h3>Gutom na? Ayaw na pagduha-duha. 🔥</h3><p>First order? 10% OFF with code <strong>UNANGDIHA</strong></p></div>
+      <a href="#menu" class="btn btn-fire">Order Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="section visit">
+  <div class="container visit-grid">
+    <div class="reveal">
+      <p class="sec-tag">📍 Visit / Order</p>
+      <h2>ARI MO, <span class="red">KAON TA!</span></h2>
+      <div class="v-list">
+        <div class="v-item"><span>📍</span><div><strong>Colon St., Cebu City</strong><br>Atbang sa metro, tapad sa Jollibee.</div></div>
+        <div class="v-item"><span>⏰</span><div><strong>Daily 10AM – 10PM</strong><br>Fri–Sun until 12 midnight</div></div>
+        <div class="v-item"><span>📞</span><div><strong>(032) 123-4567 • 0917-123-4567</strong><br>Reservations & bulk orders</div></div>
+        <div class="v-item"><span>🛵</span><div><strong>Grab & FoodPanda — "Sisig Mo Diha"</strong><br>Free delivery over ₱499</div></div>
+      </div>
+    </div>
+    <form class="order-form reveal" id="orderForm">
+      <h3>📝 Pa-Reserve / Order Ahead 🐍</h3>
+      <p class="f-sub">Validated & confirmed with Python — reply in minutes.</p>
+      <div class="f-row"><label>Name<input id="oName" type="text" placeholder="Imong ngalan" required></label><label>Phone<input id="oPhone" type="tel" placeholder="09xx-xxx-xxxx" required></label></div>
+      <label>Type<select id="oType"><option>Dine-in</option><option>Pickup</option><option>Delivery</option></select></label>
+      <label>Order<textarea id="oMsg" rows="3" placeholder="Ex: 2x Classic Pork + 1 Unli Rice, extra spicy, 7PM…"></textarea></label>
+      <button class="btn btn-fire btn-full" type="submit">Send Order →</button>
+      <p id="orderNote" class="form-note"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <a href="#home" class="logo">
+      <span class="logo-badge"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22.5" fill="#E10600" stroke="#fff" stroke-width="2.5"/><path d="M24 6c1.6 5.5-5.5 8-5.5 13a5.5 5.5 0 0 0 11 0c0-2.6-1.4-3.9-1.4-3.9s4 1.6 4 6a7.1 7.1 0 0 1-14.2 0C17.9 13.6 24 12.4 24 6Z" fill="#fff"/></svg></span>
+      <span class="logo-text">SISIG <em>MO DIHA</em></span>
+    </a>
+    <p>© <span id="year"></span> Sisig Mo Diha • Lami gyud, diha gyud! 🔥 • 🐍 PyScript inside</p>
+    <div class="f-links"><a href="#promos">Promos</a><a href="#menu">Menu</a><a href="#home">↑ Top</a></div>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart" id="cartDrawer" aria-label="Cart">
+  <div class="cart-head"><h3>🛒 Imong Order 🐍</h3><button id="cartClose" aria-label="Close">✕</button></div>
+  <div class="promo-hint">🎁 <strong>DIHA20</strong> = 20% OFF Barkada • Free delivery over ₱499 • computed in Python</div>
+  <div class="cart-items" id="cartItems"><p class="empty">Wala pa kay order — pili sa sa menu! 🍳</p></div>
+  <div class="cart-foot"><div class="total"><span>Total</span><strong id="cartTotal">₱0</strong></div><button class="btn btn-fire btn-full" id="checkoutBtn">Checkout →</button></div>
+</aside>
+
+
+<script type="py">
+import js
+from datetime import datetime
+document = js.document
+window = js.window
+def all_list(sel):
+    nodes = document.querySelectorAll(sel)
+    return [nodes.item(i) for i in range(nodes.length)]
+def q(sel):
+    return document.querySelector(sel)
+nav_links = q("#navLinks")
+def toggle_menu(e=None):
+    nav_links.classList.toggle("open")
+q("#menuBtn").addEventListener("click", toggle_menu)
+for a in all_list("#navLinks a"):
+    def _close(e=None):
+        nav_links.classList.remove("open")
+    a.addEventListener("click", _close)
+header = q("#header")
+def on_scroll(e=None):
+    y = window.scrollY
+    if y > 10:
+        header.classList.add("scrolled")
+    else:
+        header.classList.remove("scrolled")
+    for el in all_list(".reveal:not(.visible)"):
+        if el.getBoundingClientRect().top < window.innerHeight * 0.92:
+            el.classList.add("visible")
+    cur = "home"
+    for s in all_list("section[id]"):
+        if y >= (s.offsetTop - 160):
+            _id = s.getAttribute("id")
+            if _id:
+                cur = _id
+    for l in all_list(".nav-links a"):
+        if l.getAttribute("href") == f"#{cur}":
+            l.classList.add("active")
+        else:
+            l.classList.remove("active")
+window.addEventListener("scroll", on_scroll)
+def copy_code(e):
+    btn = e.currentTarget
+    code = btn.textContent.strip()
+    try:
+        js.navigator.clipboard.writeText("DIHA20")
+    except Exception:
+        pass
+    btn.textContent = "Copied ✓"
+    js.setTimeout(lambda: setattr(btn, "textContent", code), 1200)
+q("#copyCode").addEventListener("click", copy_code)
+try:
+    end = int(js.localStorage.getItem("diha_promo_end") or 0)
+except Exception:
+    end = 0
+if not end or end < js.Date.now():
+    end = int(js.Date.now() + 1000 * 60 * 60 * 38)
+    try:
+        js.localStorage.setItem("diha_promo_end", str(end))
+    except Exception:
+        pass
+def tick(*args):
+    d = max(0, end - int(js.Date.now()))
+    h = str(d // 3600000).zfill(2)
+    m = str((d % 3600000) // 60000).zfill(2)
+    s = str((d % 60000) // 1000).zfill(2)
+    q("#cdH").textContent = h
+    q("#cdM").textContent = m
+    q("#cdS").textContent = s
+js.setInterval(tick, 1000)
+tick()
+def on_filter(e):
+    btn = e.currentTarget
+    for b in all_list(".filter"):
+        b.classList.remove("active")
+    btn.classList.add("active")
+    f = btn.getAttribute("data-f")
+    for dish in all_list(".dish"):
+        cats = (dish.getAttribute("data-cat") or "").split(" ")
+        dish.style.display = "" if (f == "all" or f in cats) else "none"
+for b in all_list(".filter"):
+    b.addEventListener("click", on_filter)
+cart = []
+drawer = q("#cartDrawer")
+overlay = q("#cartOverlay")
+items_el = q("#cartItems")
+total_el = q("#cartTotal")
+count_el = q("#cartCount")
+def open_cart(e=None):
+    drawer.classList.add("show")
+    overlay.classList.add("show")
+def close_cart(e=None):
+    drawer.classList.remove("show")
+    overlay.classList.remove("show")
+q("#cartOpen").addEventListener("click", open_cart)
+q("#cartClose").addEventListener("click", close_cart)
+overlay.addEventListener("click", close_cart)
+def cart_total():
+    return sum(i["price"] * i["qty"] for i in cart)
+def render_cart():
+    count_el.textContent = str(sum(i["qty"] for i in cart))
+    if not cart:
+        items_el.innerHTML = "<p class='empty'>Wala pa kay order — pili sa sa menu! 🍳</p>"
+        total_el.textContent = "₱0"
+        return
+    html = ""
+    for idx, item in enumerate(cart):
+        html += (f"<div class='ci'><div><strong>{item['name']} x{item['qty']}</strong><small>₱{item['price'] * item['qty']}</small></div><button data-act='dec' data-idx='{idx}'>−</button><button data-act='inc' data-idx='{idx}'>+</button></div>")
+    items_el.innerHTML = html
+    total_el.textContent = f"₱{cart_total()}"
+    for b in all_list(".ci button"):
+        b.addEventListener("click", on_qty)
+def on_qty(e):
+    btn = e.currentTarget
+    idx = int(btn.getAttribute("data-idx"))
+    if 0 <= idx < len(cart):
+        if btn.getAttribute("data-act") == "inc":
+            cart[idx]["qty"] += 1
+        else:
+            cart[idx]["qty"] -= 1
+            if cart[idx]["qty"] <= 0:
+                cart.pop(idx)
+        render_cart()
+def add_to_cart(e):
+    btn = e.currentTarget
+    name = btn.getAttribute("data-name")
+    price = int(btn.getAttribute("data-price"))
+    found = next((i for i in cart if i["name"] == name), None)
+    if found:
+        found["qty"] += 1
+    else:
+        cart.append({"name": name, "price": price, "qty": 1})
+    render_cart()
+    open_cart()
+    btn.textContent = "Added ✓"
+    js.setTimeout(lambda: setattr(btn, "textContent", "Add +"), 900)
+for b in all_list(".add"):
+    b.addEventListener("click", add_to_cart)
+def checkout(e=None):
+    if not cart:
+        js.alert("Pili sa ug sisig! 🍳")
+        return
+    lines = "\n".join(f"{i['qty']}x {i['name']}" for i in cart)
+    free = " + FREE delivery! 🛵" if cart_total() >= 499 else ""
+    js.alert(f"Salamat! 🔥 Order received:\n{lines}\nTotal: ₱{cart_total()}{free}\nLuto na dayon!")
+    cart.clear()
+    render_cart()
+    close_cart()
+q("#checkoutBtn").addEventListener("click", checkout)
+form = q("#orderForm")
+def submit_order(e):
+    e.preventDefault()
+    name = (q("#oName").value or "").strip()
+    phone = (q("#oPhone").value or "").strip()
+    otype = q("#oType").value if q("#oType") else "Dine-in"
+    note = q("#orderNote")
+    if len(phone) < 7:
+        note.textContent = "⚠️ Palihug butangi ug valid phone number."
+        return
+    who = name if name else "suki"
+    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
+    form.reset()
+form.addEventListener("submit", submit_order)
+q("#year").textContent = str(datetime.now().year)
+render_cart()
+on_scroll()
+tick()
+status = q("#pyStatus")
+if status:
+    status.textContent = "🐍 Powered by Python (PyScript) ✅ — cart, filter & promos run on Python"
+    js.setTimeout(lambda: status.classList.add("hide"), 3000)
+</script>
+<script>
+// Fallback (plain JS): if PyScript/CDN is blocked, still show ALL content + basic cart.
+(function () {
+  setTimeout(function () {
+    var st = document.getElementById('pyStatus');
+    var pyAlive = st && st.textContent.indexOf('✅') !== -1;
+    if (!pyAlive) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+      var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+      // minimal countdown so promo section isn't blank
+      var h = document.getElementById('cdH'), m = document.getElementById('cdM'), s = document.getElementById('cdS');
+      if (h && !window.__pyTick) {
+        var end = Date.now() + 38 * 3600 * 1000;
+        setInterval(function () {
+          var d = Math.max(0, end - Date.now());
+          h.textContent = String(Math.floor(d / 3.6e6)).padStart(2, '0');
+          m.textContent = String(Math.floor(d % 3.6e6 / 6e4)).padStart(2, '0');
+          s.textContent = String(Math.floor(d % 6e4 / 1e3)).padStart(2, '0');
+        }, 1000);
+      }
+      // minimal add-to-cart so buttons work without Python
+      if (!window.__pyCart && !pyAlive) {
+        window.__pyCart = true;
+        var cart = [];
+        var drawer = document.getElementById('cartDrawer'), overlay = document.getElementById('cartOverlay'),
+            items = document.getElementById('cartItems'), total = document.getElementById('cartTotal'),
+            count = document.getElementById('cartCount');
+        function render() {
+          count.textContent = cart.reduce(function (n, i) { return n + i.qty; }, 0);
+          if (!cart.length) { items.innerHTML = "<p class='empty'>Wala pa kay order — pili sa sa menu! 🍳</p>"; total.textContent = '₱0'; return; }
+          items.innerHTML = cart.map(function (i, idx) { return "<div class='ci'><div><strong>" + i.name + " x" + i.qty + "</strong><small>₱" + (i.price * i.qty) + "</small></div></div>"; }).join('');
+          total.textContent = '₱' + cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+        }
+        document.querySelectorAll('.add').forEach(function (b) {
+          if (b.__fb) return; b.__fb = true;
+          b.addEventListener('click', function () {
+            var f = cart.find(function (i) { return i.name === b.dataset.name; });
+            f ? f.qty++ : cart.push({ name: b.dataset.name, price: +b.dataset.price, qty: 1 });
+            render();
+            drawer.classList.add('show'); overlay.classList.add('show');
+          });
+        });
+        document.getElementById('cartOpen').addEventListener('click', function () { drawer.classList.add('show'); overlay.classList.add('show'); });
+        document.getElementById('cartClose').addEventListener('click', function () { drawer.classList.remove('show'); overlay.classList.remove('show'); });
+        overlay.addEventListener('click', function () { drawer.classList.remove('show'); overlay.classList.remove('show'); });
+        document.getElementById('checkoutBtn').addEventListener('click', function () {
+          if (!cart.length) return alert('Pili sa ug sisig! 🍳');
+          alert('Salamat! 🔥 Total: ₱' + cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0));
+          cart = []; render();
+        });
+        if (st) { st.textContent = '⚠️ Offline mode: showing all content (Python blocked)'; }
+        render();
+      }
+    }
+  }, 3500);
+  // reveal on scroll even before fallback kicks in
+  window.addEventListener('scroll', function () {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add('visible');
+    });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
