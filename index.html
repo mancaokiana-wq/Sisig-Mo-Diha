@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sisig Mo Diha — Sizzling Sisig House | Lami Gyud!</title>
-<meta name="description" content="Sisig Mo Diha — Cebu's hottest sizzling sisig. Crispy pork, chicken, tuna & unli rice. Promo bundles powered by Python (PyScript). Order now!" />
+<meta name="description" content="Sisig Mo Diha — Cebu's hottest sizzling sisig. Crispy pork, chicken, tuna & unli rice. Promo bundles, fast delivery. Order now!" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 
 <div class="bg-fx" aria-hidden="true"><span class="ember e1"></span><span class="ember e2"></span><span class="ember e3"></span><span class="ember e4"></span><span class="ember e5"></span><span class="ember e6"></span></div>
 
-<div class="topbar">🔥 GRAND OPENING — 20% OFF Barkada Bundles with code <button class="code" id="copyCode" title="Click to copy">DIHA20</button> • Free delivery over ₱499 🛵 • 🐍 Powered by PyScript</div>
+<div class="topbar">🔥 GRAND OPENING — 20% OFF Barkada Bundles with code <button class="code" id="copyCode" title="Click to copy">DIHA20</button> • Free delivery over ₱499 🛵</div>
 
 <!-- HEADER: LOGO TOP LEFT -->
 <header class="header" id="header">
@@ -99,9 +99,9 @@
     <div class="sec-head reveal">
       <p class="sec-tag">🎁 Limited Promos</p>
       <h2>DEAL NGA <span class="red">DI GYUD MA-AWAT.</span></h2>
-      <p class="sec-sub">Tap "Claim" — the cart & totals are computed in Python. Hurry, promo ends soon!</p>
+      <p class="sec-sub">Tap "Claim" — hurry, promo ends soon!</p>
     </div>
-    <div class="countdown reveal">⏳ Promo ends in <strong><span id="cdH">00</span>:<span id="cdM">00</span>:<span id="cdS">00</span></strong> <small id="cdNote">(Python timer 🐍)</small></div>
+    <div class="countdown reveal">⏳ Promo ends in <strong><span id="cdH">00</span>:<span id="cdM">00</span>:<span id="cdS">00</span></strong></div>
     <div class="promo-grid">
       <article class="promo-card featured reveal">
         <span class="off">-20%</span>
@@ -135,7 +135,7 @@
 <section id="menu" class="section">
   <div class="container">
     <div class="sec-head split reveal">
-      <div><p class="sec-tag">🔥 Best Sellers — filtered by Python</p><h2>PILI NA, <span class="red">KAON NA!</span></h2></div>
+      <div><p class="sec-tag">🔥 Best Sellers</p><h2>PILI NA, <span class="red">KAON NA!</span></h2></div>
       <div class="menu-note">🍚 Unli rice +₱40 • 🥚 Extra egg +₱20 • 🌶️ Extra spicy +₱10</div>
     </div>
     <div class="filter-row reveal">
@@ -213,8 +213,8 @@
       </div>
     </div>
     <form class="order-form reveal" id="orderForm">
-      <h3>📝 Pa-Reserve / Order Ahead 🐍</h3>
-      <p class="f-sub">Validated & confirmed with Python — reply in minutes.</p>
+      <h3>📝 Pa-Reserve / Order Ahead</h3>
+      <p class="f-sub">Reserve a table or order for pickup — we reply in minutes.</p>
       <div class="f-row"><label>Name<input id="oName" type="text" placeholder="Imong ngalan" required></label><label>Phone<input id="oPhone" type="tel" placeholder="09xx-xxx-xxxx" required></label></div>
       <label>Type<select id="oType"><option>Dine-in</option><option>Pickup</option><option>Delivery</option></select></label>
       <label>Order<textarea id="oMsg" rows="3" placeholder="Ex: 2x Classic Pork + 1 Unli Rice, extra spicy, 7PM…"></textarea></label>
@@ -230,7 +230,7 @@
       <span class="logo-badge"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22.5" fill="#E10600" stroke="#fff" stroke-width="2.5"/><path d="M24 6c1.6 5.5-5.5 8-5.5 13a5.5 5.5 0 0 0 11 0c0-2.6-1.4-3.9-1.4-3.9s4 1.6 4 6a7.1 7.1 0 0 1-14.2 0C17.9 13.6 24 12.4 24 6Z" fill="#fff"/></svg></span>
       <span class="logo-text">SISIG <em>MO DIHA</em></span>
     </a>
-    <p>© <span id="year"></span> Sisig Mo Diha • Lami gyud, diha gyud! 🔥 • 🐍 PyScript inside</p>
+    <p>© <span id="year"></span> Sisig Mo Diha • Lami gyud, diha gyud! 🔥</p>
     <div class="f-links"><a href="#promos">Promos</a><a href="#menu">Menu</a><a href="#home">↑ Top</a></div>
   </div>
 </footer>
@@ -238,8 +238,8 @@
 <!-- CART -->
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart" id="cartDrawer" aria-label="Cart">
-  <div class="cart-head"><h3>🛒 Imong Order 🐍</h3><button id="cartClose" aria-label="Close">✕</button></div>
-  <div class="promo-hint">🎁 <strong>DIHA20</strong> = 20% OFF Barkada • Free delivery over ₱499 • computed in Python</div>
+  <div class="cart-head"><h3>🛒 Imong Order</h3><button id="cartClose" aria-label="Close">✕</button></div>
+  <div class="promo-hint">🎁 <strong>DIHA20</strong> = 20% OFF Barkada • Free delivery over ₱499</div>
   <div class="cart-items" id="cartItems"><p class="empty">Wala pa kay order — pili sa sa menu! 🍳</p></div>
   <div class="cart-foot"><div class="total"><span>Total</span><strong id="cartTotal">₱0</strong></div><button class="btn btn-fire btn-full" id="checkoutBtn">Checkout →</button></div>
 </aside>
@@ -404,7 +404,7 @@ def submit_order(e):
         note.textContent = "⚠️ Palihug butangi ug valid phone number."
         return
     who = name if name else "suki"
-    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
+    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo."
     form.reset()
 form.addEventListener("submit", submit_order)
 q("#year").textContent = str(datetime.now().year)
@@ -413,7 +413,7 @@ on_scroll()
 tick()
 status = q("#pyStatus")
 if status:
-    status.textContent = "🐍 Powered by Python (PyScript) ✅ — cart, filter & promos run on Python"
+    status.textContent = "✅ Order system ready — cart, filter & promos active"
     js.setTimeout(lambda: status.classList.add("hide"), 3000)
 </script>
 <script>
@@ -466,7 +466,7 @@ if status:
           alert('Salamat! 🔥 Total: ₱' + cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0));
           cart = []; render();
         });
-        if (st) { st.textContent = '⚠️ Offline mode: showing all content (Python blocked)'; }
+        if (st) { st.textContent = '⚠️ Offline mode: showing all content'; }
         render();
       }
     }
