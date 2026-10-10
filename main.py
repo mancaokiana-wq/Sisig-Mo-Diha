@@ -53,17 +53,18 @@ def on_scroll(e=None):
 window.addEventListener("scroll", on_scroll)
 
 # ---------- copy promo code (Python!) ----------
-def copy_code(e):
-    btn = e.currentTarget
-    code = btn.textContent.strip()
-    try:
-        js.navigator.clipboard.writeText("DIHA20")
-    except Exception:
-        pass
-    btn.textContent = "Copied ✓"
-    js.setTimeout(lambda: setattr(btn, "textContent", code), 1200)
-
-q("#copyCode").addEventListener("click", copy_code)
+copyBtn = q("#copyCode")
+if copyBtn:
+    def copy_code(e):
+        btn = e.currentTarget
+        code = btn.textContent.strip()
+        try:
+            js.navigator.clipboard.writeText(code)
+        except Exception:
+            pass
+        btn.textContent = "Copied ✓"
+        js.setTimeout(lambda: setattr(btn, "textContent", code), 1200)
+    copyBtn.addEventListener("click", copy_code)
 
 # ---------- promo countdown (Python timer) ----------
 try:
@@ -179,8 +180,7 @@ def checkout(e=None):
         js.alert("Pili sa ug sisig! 🍳")
         return
     lines = "\n".join(f"{i['qty']}x {i['name']}" for i in cart)
-    free = " + FREE delivery! 🛵" if cart_total() >= 499 else ""
-    js.alert(f"Salamat! 🔥 Order received:\n{lines}\nTotal: ₱{cart_total()}{free}\nLuto na dayon!")
+    js.alert(f"Salamat! 🔥 Order received:\n{lines}\nTotal: ₱{cart_total()}\nLuto na dayon!")
     cart.clear()
     render_cart()
     close_cart()
