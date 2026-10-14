@@ -29,9 +29,12 @@ h1,h2,h3{font-family:var(--font-d);letter-spacing:.5px;line-height:1.05;font-wei
 .logo-text{font-family:var(--font-d);font-size:1.25rem;line-height:1;display:flex;flex-direction:column}
 .logo-text em{font-style:normal;color:var(--red2)}
 .logo-text small{font-family:var(--font-b);font-size:.58rem;letter-spacing:2.5px;color:var(--muted);font-weight:800}
-.nav-links{display:flex;gap:.3rem;background:#151515;border:1px solid var(--border);padding:.3rem;border-radius:100px}
-.nav-links a{padding:.5rem 1rem;border-radius:100px;font-size:.87rem;font-weight:600;color:var(--muted)}
+.nav-links{display:flex;gap:.3rem;background:#151515;border:1px solid var(--border);padding:.3rem;border-radius:100px;position:relative}
+.nav-links a{padding:.5rem 1rem;border-radius:100px;font-size:.87rem;font-weight:600;color:var(--muted);position:relative;z-index:1;transition:color .25s}
 .nav-links a:hover{color:#fff}.nav-links a.active{background:var(--red);color:#fff}
+.nav-pill{position:absolute;top:.3rem;left:0;width:0;height:calc(100% - .6rem);background:var(--red);border-radius:100px;transition:left .35s cubic-bezier(.4,0,.2,1),top .35s cubic-bezier(.4,0,.2,1),width .35s cubic-bezier(.4,0,.2,1),height .35s cubic-bezier(.4,0,.2,1),opacity .3s;z-index:0;box-shadow:0 4px 18px rgba(225,6,0,.55);opacity:0;pointer-events:none}
+.nav-links.has-pill a{background:transparent}
+.nav-links.has-pill a.active{background:transparent;color:#fff}
 .header-actions{display:flex;align-items:center;gap:.6rem}
 .cart-btn{background:#1c1c1c;border:1px solid var(--border);color:#fff;border-radius:100px;padding:.55rem .95rem;cursor:pointer;font-weight:800}
 .cart-btn span{background:var(--red);border-radius:100px;padding:.05rem .55rem;font-size:.8rem;margin-left:.2rem}
@@ -114,8 +117,7 @@ h1,h2,h3{font-family:var(--font-d);letter-spacing:.5px;line-height:1.05;font-wei
 .dish::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:0;transition:.25s}
 .dish:hover{transform:translateY(-5px);border-color:var(--red)}
 .dish:hover::before{opacity:1}
-.dish-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-.dish-emoji{font-size:2.4rem;background:#222;width:62px;height:62px;display:flex;align-items:center;justify-content:center;border-radius:16px;border:1px solid #333}
+.dish-top{display:flex;align-items:center;justify-content:flex-start;margin-bottom:.75rem}
 .badge-hot{background:var(--red);color:#fff;font-size:.66rem;font-weight:800;padding:.28rem .65rem;border-radius:100px}
 .badge-new{background:var(--gold);color:#000;font-size:.66rem;font-weight:800;padding:.28rem .65rem;border-radius:100px}
 .badge-spicy{background:#3a0d00;border:1px solid #ff5a00;color:#ff8a5a;font-size:.66rem;font-weight:800;padding:.28rem .65rem;border-radius:100px}
@@ -125,6 +127,13 @@ h1,h2,h3{font-family:var(--font-d);letter-spacing:.5px;line-height:1.05;font-wei
 .stars{font-size:.8rem;margin:.4rem 0 .8rem}.stars small{color:var(--muted)}
 .dish-foot{display:flex;align-items:center;justify-content:space-between}
 .price{font-family:var(--font-d);font-size:1.4rem;color:var(--gold)}
+.dish.has-img{padding:0}
+.dish.has-img .dish-body{padding:1.1rem 1.35rem 1.35rem}
+.dish-img{position:relative;height:230px;aspect-ratio:16 / 10;overflow:hidden;border-bottom:1px solid #262626;background:#000;display:block}
+.dish-img img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#000}
+.dish-img img.tuned-alacarte{object-position:center top;transform:scale(1.25) translate(12px, -20px);transform-origin:center}
+.dish-img img.tuned-silog{transform:scale(1.35) translate(20px, -18px);transform-origin:center}
+.dish-img .badge-hot,.dish-img .badge-new,.dish-img .badge-spicy,.dish-img .badge-veg{position:absolute;top:12px;left:12px;box-shadow:0 4px 14px rgba(0,0,0,.5);z-index:2}
 .why{background:#0a0a0a;border-top:1px solid #222;border-bottom:1px solid #222}
 .steps{display:flex;gap:.8rem;margin-bottom:1.6rem}
 .step{flex:1;background:#141414;border:1px solid #2b2b2b;border-radius:16px;padding:1.2rem;text-align:center}
@@ -195,6 +204,7 @@ footer{border-top:2px solid var(--red);padding:1.3rem 0;background:#050505}
   .steps{flex-direction:column}.step-arrow{transform:rotate(90deg);align-self:center}
   .nav-links{display:none;position:absolute;top:78px;left:1rem;right:1rem;background:#111;border:1px solid #333;border-radius:16px;flex-direction:column;padding:.7rem;z-index:99}
   .nav-links.open{display:flex}
+  .nav-pill{border-radius:12px}
   .menu-btn{display:flex}
   .sec-head.split{flex-direction:column;align-items:flex-start}
 }

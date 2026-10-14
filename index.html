@@ -28,6 +28,7 @@
       <span class="logo-text">SISIG <em>MO DIHA</em><small>★ SIZZLING HOUSE ★</small></span>
     </a>
     <nav class="nav-links" id="navLinks">
+      <span class="nav-pill" id="navPill"></span>
       <a href="#home" class="active">Home</a>
       <a href="#promos">Promos</a>
       <a href="#menu">Menu</a>
@@ -141,17 +142,17 @@
     </div>
     <div class="menu-grid" id="menuGrid">
       <!-- Main Menu Items -->
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🍳</span><span class="badge-hot">⭐ ALA CARTE</span></div><h3>Ala Carte</h3><p>Sisig, egg</p><div class="stars">⭐⭐⭐⭐⭐ <small>(812)</small></div><div class="dish-foot"><strong class="price">₱79</strong><button class="btn btn-fire btn-sm add" data-name="Ala Carte (Sisig, egg)" data-price="79">Add +</button></div></article>
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🍚</span><span class="badge-hot">🔥 POPULAR</span></div><h3>Silog</h3><p>Sisig, egg, rice</p><div class="stars">⭐⭐⭐⭐⭐ <small>(640)</small></div><div class="dish-foot"><strong class="price">₱89</strong><button class="btn btn-fire btn-sm add" data-name="Silog (sisig, egg, rice)" data-price="89">Add +</button></div></article>
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🥟</span><span class="badge-hot">⭐ BEST SELLER</span></div><h3>Lumpia Combo</h3><p>Sisig, egg, rice, 2 lumpia</p><div class="stars">⭐⭐⭐⭐⭐ <small>(418)</small></div><div class="dish-foot"><strong class="price">₱109</strong><button class="btn btn-fire btn-sm add" data-name="Lumpia combo" data-price="109">Add +</button></div></article>
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🥟</span><span class="badge-spicy">🌶 COMBO</span></div><h3>Siomai Combo</h3><p>Sisig, egg, rice, 2 siomai</p><div class="stars">⭐⭐⭐⭐☆ <small>(355)</small></div><div class="dish-foot"><strong class="price">₱125</strong><button class="btn btn-fire btn-sm add" data-name="Siomai combo" data-price="125">Add +</button></div></article>
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🌭</span><span class="badge-hot">🔥 SIZZLING</span></div><h3>Hungarian Combo</h3><p>Sisig, egg, rice, hungarian</p><div class="stars">⭐⭐⭐⭐⭐ <small>(290)</small></div><div class="dish-foot"><strong class="price">₱145</strong><button class="btn btn-fire btn-sm add" data-name="Hungarian combo" data-price="145">Add +</button></div></article>
-      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="dish-emoji">🎉</span><span class="badge-veg">🔥 OVERLOAD</span></div><h3>Overload Combo</h3><p>Sisig, egg, rice, 2 siomai, hungarian</p><div class="stars">⭐⭐⭐⭐⭐ <small>(502)</small></div><div class="dish-foot"><strong class="price">₱170</strong><button class="btn btn-fire btn-sm add" data-name="Overload combo" data-price="170">Add +</button></div></article>
+      <article class="dish reveal has-img" data-cat="meals"><div class="dish-img"><img class="tuned-alacarte" src="alacarte.jpg" alt="Ala Carte sizzling sisig with egg" /><span class="badge-hot">⭐ ALA CARTE</span></div><div class="dish-body"><h3>Ala Carte</h3><p>Sisig, egg</p><div class="stars">⭐⭐⭐⭐⭐ <small>(812)</small></div><div class="dish-foot"><strong class="price">₱79</strong><button class="btn btn-fire btn-sm add" data-name="Ala Carte (Sisig, egg)" data-price="79">Add +</button></div></div></article>
+      <article class="dish reveal has-img" data-cat="meals"><div class="dish-img"><img class="tuned-silog" src="sisig.jpg" alt="Silog sizzling sisig with egg and rice" /><span class="badge-hot">🔥 POPULAR</span></div><div class="dish-body"><h3>Silog</h3><p>Sisig, egg, rice</p><div class="stars">⭐⭐⭐⭐⭐ <small>(640)</small></div><div class="dish-foot"><strong class="price">₱89</strong><button class="btn btn-fire btn-sm add" data-name="Silog (sisig, egg, rice)" data-price="89">Add +</button></div></div></article>
+      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="badge-hot">⭐ BEST SELLER</span></div><h3>Lumpia Combo</h3><p>Sisig, egg, rice, 2 lumpia</p><div class="stars">⭐⭐⭐⭐⭐ <small>(418)</small></div><div class="dish-foot"><strong class="price">₱109</strong><button class="btn btn-fire btn-sm add" data-name="Lumpia combo" data-price="109">Add +</button></div></article>
+      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="badge-spicy">🌶 COMBO</span></div><h3>Siomai Combo</h3><p>Sisig, egg, rice, 2 siomai</p><div class="stars">⭐⭐⭐⭐☆ <small>(355)</small></div><div class="dish-foot"><strong class="price">₱125</strong><button class="btn btn-fire btn-sm add" data-name="Siomai combo" data-price="125">Add +</button></div></article>
+      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="badge-hot">🔥 SIZZLING</span></div><h3>Hungarian Combo</h3><p>Sisig, egg, rice, hungarian</p><div class="stars">⭐⭐⭐⭐⭐ <small>(290)</small></div><div class="dish-foot"><strong class="price">₱145</strong><button class="btn btn-fire btn-sm add" data-name="Hungarian combo" data-price="145">Add +</button></div></article>
+      <article class="dish reveal" data-cat="meals"><div class="dish-top"><span class="badge-veg">🔥 OVERLOAD</span></div><h3>Overload Combo</h3><p>Sisig, egg, rice, 2 siomai, hungarian</p><div class="stars">⭐⭐⭐⭐⭐ <small>(502)</small></div><div class="dish-foot"><strong class="price">₱170</strong><button class="btn btn-fire btn-sm add" data-name="Overload combo" data-price="170">Add +</button></div></article>
 
       <!-- Add-ons -->
-      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="dish-emoji">🥟</span><span class="badge-new">➕ ADD-ON</span></div><h3>Siomai (Add-on)</h3><p>Extra serving of delicious siomai</p><div class="stars">⭐⭐⭐⭐⭐ <small>(150)</small></div><div class="dish-foot"><strong class="price">₱15</strong><button class="btn btn-fire btn-sm add" data-name="Siomai (Add-on)" data-price="15">Add +</button></div></article>
-      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="dish-emoji">🥤</span><span class="badge-new">➕ ADD-ON</span></div><h3>Softdrinks</h3><p>Refreshing bottled/can softdrinks</p><div class="stars">⭐⭐⭐⭐⭐ <small>(320)</small></div><div class="dish-foot"><strong class="price">₱25</strong><button class="btn btn-fire btn-sm add" data-name="Softdrinks" data-price="25">Add +</button></div></article>
-      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="dish-emoji">🥟</span><span class="badge-new">➕ ADD-ON</span></div><h3>Lumpia (Add-on)</h3><p>Crispy fried lumpia piece</p><div class="stars">⭐⭐⭐⭐⭐ <small>(200)</small></div><div class="dish-foot"><strong class="price">₱10</strong><button class="btn btn-fire btn-sm add" data-name="Lumpia (Add-on)" data-price="10">Add +</button></div></article>
+      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="badge-new">➕ ADD-ON</span></div><h3>Siomai (Add-on)</h3><p>Extra serving of delicious siomai</p><div class="stars">⭐⭐⭐⭐⭐ <small>(150)</small></div><div class="dish-foot"><strong class="price">₱15</strong><button class="btn btn-fire btn-sm add" data-name="Siomai (Add-on)" data-price="15">Add +</button></div></article>
+      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="badge-new">➕ ADD-ON</span></div><h3>Softdrinks</h3><p>Refreshing bottled/can softdrinks</p><div class="stars">⭐⭐⭐⭐⭐ <small>(320)</small></div><div class="dish-foot"><strong class="price">₱25</strong><button class="btn btn-fire btn-sm add" data-name="Softdrinks" data-price="25">Add +</button></div></article>
+      <article class="dish reveal" data-cat="addons"><div class="dish-top"><span class="badge-new">➕ ADD-ON</span></div><h3>Lumpia (Add-on)</h3><p>Crispy fried lumpia piece</p><div class="stars">⭐⭐⭐⭐⭐ <small>(200)</small></div><div class="dish-foot"><strong class="price">₱10</strong><button class="btn btn-fire btn-sm add" data-name="Lumpia (Add-on)" data-price="10">Add +</button></div></article>
     </div>
   </div>
 </section>
@@ -302,13 +303,37 @@ def all_list(sel):
 def q(sel):
     return document.querySelector(sel)
 nav_links = q("#navLinks")
+nav_pill = q("#navPill")
+def move_pill(target=None):
+    try:
+        if target is None:
+            target = q(".nav-links a.active")
+        if not target or not nav_pill:
+            return
+        nav_links.classList.add("has-pill")
+        nav_pill.style.left = f"{target.offsetLeft}px"
+        nav_pill.style.top = f"{target.offsetTop}px"
+        nav_pill.style.width = f"{target.offsetWidth}px"
+        nav_pill.style.height = f"{target.offsetHeight}px"
+        nav_pill.style.opacity = "1"
+    except Exception:
+        pass
+def set_active(link):
+    for l in all_list(".nav-links a"):
+        l.classList.remove("active")
+    link.classList.add("active")
+    move_pill(link)
 def toggle_menu(e=None):
     nav_links.classList.toggle("open")
+    js.setTimeout(move_pill, 50)
 q("#menuBtn").addEventListener("click", toggle_menu)
-for a in all_list("#navLinks a"):
-    def _close(e=None):
+def make_nav_handler(link):
+    def handler(e=None):
+        set_active(link)
         nav_links.classList.remove("open")
-    a.addEventListener("click", _close)
+    return handler
+for a in all_list("#navLinks a"):
+    a.addEventListener("click", make_nav_handler(a))
 header = q("#header")
 def on_scroll(e=None):
     y = window.scrollY
@@ -330,7 +355,9 @@ def on_scroll(e=None):
             l.classList.add("active")
         else:
             l.classList.remove("active")
+    move_pill()
 window.addEventListener("scroll", on_scroll)
+window.addEventListener("resize", lambda e=None: move_pill())
 copyBtn = q("#copyCode")
 if copyBtn:
     def copy_code(e):
@@ -457,11 +484,60 @@ form.addEventListener("submit", submit_order)
 q("#year").textContent = str(datetime.now().year)
 render_cart()
 on_scroll()
+js.setTimeout(move_pill, 300)
+js.setTimeout(move_pill, 1000)
 tick()
 status = q("#pyStatus")
 if status:
     status.textContent = "🐍 Powered by Python (PyScript) ✅ — cart, filter & promos run on Python"
     js.setTimeout(lambda: status.classList.add("hide"), 3000)
+</script>
+<script>
+// Sliding navbar pill — red effect follows click + scroll (always on, works with or without PyScript)
+(function () {
+  var nav = document.getElementById('navLinks');
+  var pill = document.getElementById('navPill');
+  if (!nav || !pill) return;
+  function move(target) {
+    target = target || nav.querySelector('a.active') || nav.querySelector('a');
+    if (!target || !target.offsetWidth) { pill.style.opacity = '0'; return; }
+    nav.classList.add('has-pill');
+    pill.style.left = target.offsetLeft + 'px';
+    pill.style.top = target.offsetTop + 'px';
+    pill.style.width = target.offsetWidth + 'px';
+    pill.style.height = target.offsetHeight + 'px';
+    pill.style.opacity = '1';
+  }
+  function setActive(link) {
+    nav.querySelectorAll('a').forEach(function (l) { l.classList.remove('active'); });
+    link.classList.add('active');
+    move(link);
+  }
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setActive(a);
+      nav.classList.remove('open');
+    });
+  });
+  function spy() {
+    var y = window.scrollY || window.pageYOffset;
+    var cur = 'home';
+    document.querySelectorAll('section[id]').forEach(function (s) {
+      if (y >= (s.offsetTop - 160)) cur = s.getAttribute('id');
+    });
+    nav.querySelectorAll('a').forEach(function (l) {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+    });
+    move();
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  window.addEventListener('resize', function () { move(); });
+  window.addEventListener('load', function () { move(); spy(); });
+  document.addEventListener('DOMContentLoaded', function () { move(); });
+  setTimeout(move, 300);
+  setTimeout(function () { move(); spy(); }, 1000);
+  move();
+})();
 </script>
 <script>
 // Fallback (plain JS): if PyScript/CDN is blocked, still show ALL content + basic cart.
