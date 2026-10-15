@@ -267,6 +267,7 @@
       <p class="f-sub">Reply in Minutes</p>
       <div class="f-row"><label>Name<input id="oName" type="text" placeholder="Imong ngalan" required></label><label>Phone<input id="oPhone" type="tel" placeholder="09xx-xxx-xxxx" required></label></div>
       <label>Type<select id="oType"><option>Dine-in</option><option>Pickup</option><option>Delivery</option></select></label>
+      <div class="f-row"><label>Date<input id="oDate" type="date"></label><label>Time<input id="oTime" type="time"></label></div>
       <label>Order<textarea id="oMsg" rows="3" placeholder="Ex: 2x Lumpia Combo, extra spicy, 7PM…"></textarea></label>
       <button class="btn btn-fire btn-full" type="submit">Send Order →</button>
       <p id="orderNote" class="form-note"></p>
@@ -511,12 +512,17 @@ def submit_order(e):
     name = (q("#oName").value or "").strip()
     phone = (q("#oPhone").value or "").strip()
     otype = q("#oType").value if q("#oType") else "Dine-in"
+    odate = (q("#oDate").value or "").strip() if q("#oDate") else ""
+    otime = (q("#oTime").value or "").strip() if q("#oTime") else ""
     note = q("#orderNote")
     if len(phone) < 7:
         note.textContent = "⚠️ Palihug butangi ug valid phone number."
         return
     who = name if name else "suki"
-    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
+    sched = ""
+    if odate or otime:
+        sched = f" para sa {(odate + ' ' + otime).strip()}"
+    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order{sched} — tawagan ka namo."
     form.reset()
 on(form, "submit", submit_order)
 q("#year").textContent = str(datetime.now().year)
@@ -525,7 +531,7 @@ on_scroll()
 later(300, move_pill)
 later(1000, move_pill)
 tick()
-js.window.__pyAlive = True
+js.window.__pyAlive = True  
 </script>
 <script>
 // Sliding navbar pill — instant-paint mirror of PyScript (main.py); PyScript owns the logic when loaded
@@ -685,13 +691,16 @@ js.window.__pyAlive = True
       var phone = ((document.getElementById('oPhone') || {}).value || '').trim();
       var typeEl = document.getElementById('oType');
       var otype = typeEl ? typeEl.value : 'Dine-in';
+      var dateEl = document.getElementById('oDate');
+      var timeEl = document.getElementById('oTime');
+      var sched = ((dateEl && dateEl.value ? dateEl.value : '') + ' ' + (timeEl && timeEl.value ? timeEl.value : '')).trim();
       var note = document.getElementById('orderNote');
       if (phone.length < 7) {
         if (note) note.textContent = '⚠️ Palihug butangi ug valid phone number.';
         return;
       }
       var who = name || 'suki';
-      if (note) note.textContent = 'Salamat ' + who + '! 🔥 Nadawat na imong ' + otype + ' order — tawagan ka namo.';
+      if (note) note.textContent = 'Salamat ' + who + '! 🔥 Nadawat na imong ' + otype + ' order' + (sched ? ' para sa ' + sched : '') + ' — tawagan ka namo.';
       form.reset();
     });
   }

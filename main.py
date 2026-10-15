@@ -299,12 +299,17 @@ def submit_order(e):
     name = (q("#oName").value or "").strip()
     phone = (q("#oPhone").value or "").strip()
     otype = q("#oType").value if q("#oType") else "Dine-in"
+    odate = (q("#oDate").value or "").strip() if q("#oDate") else ""
+    otime = (q("#oTime").value or "").strip() if q("#oTime") else ""
     note = q("#orderNote")
     if len(phone) < 7:
         note.textContent = "⚠️ Palihug butangi ug valid phone number."
         return
     who = name if name else "suki"
-    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
+    sched = ""
+    if odate or otime:
+        sched = f" para sa {(odate + ' ' + otime).strip()}"
+    note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order{sched} — tawagan ka namo."
     form.reset()
 
 
