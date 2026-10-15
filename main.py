@@ -4,10 +4,29 @@
 import js
 import json
 from datetime import datetime
+from pyodide.ffi import create_proxy, create_once_callable
 
 document = js.document
 window = js.window
 CART_KEY = "diha_cart"
+
+# NOTE: Pyodide destroys implicitly-created proxies after the call, so every
+# Python callback handed to the browser must be a retained create_proxy.
+_py_proxies = []
+
+
+def on(el, ev, fn):
+    p = create_proxy(fn)
+    _py_proxies.append(p)
+    el.addEventListener(ev, p)
+    return p
+
+
+def later(ms, fn):
+    p = create_once_callable(fn)
+    _py_proxies.append(p)
+    js.setTimeout(p, ms)
+    return p
 
 
 def all_list(sel):
@@ -73,10 +92,10 @@ def set_active(link):
 
 def toggle_menu(e=None):
     nav_links.classList.toggle("open")
-    js.setTimeout(move_pill, 50)
+    later(50, move_pill)
 
 
-q("#menuBtn").addEventListener("click", toggle_menu)
+on(q("#menuBtn"), "click", toggle_menu)
 
 
 def make_nav_handler(link):
@@ -87,7 +106,7 @@ def make_nav_handler(link):
 
 
 for a in all_list("#navLinks a"):
-    a.addEventListener("click", make_nav_handler(a))
+    on(a, "click", make_nav_handler(a))
 
 
 # ---------- scroll: header, reveal, active nav ----------
@@ -117,8 +136,8 @@ def on_scroll(e=None):
     move_pill()
 
 
-window.addEventListener("scroll", on_scroll)
-window.addEventListener("resize", lambda e=None: move_pill())
+on(window, "scroll", on_scroll)
+on(window, "resize", lambda e=None: move_pill())
 
 
 # ---------- promo countdown (Python timer) ----------
@@ -145,7 +164,9 @@ def tick(*args):
 
 
 js.window.__pyTick = True
-js.setInterval(tick, 1000)
+_tick_proxy = create_proxy(tick)
+_py_proxies.append(_tick_proxy)
+js.setInterval(_tick_proxy, 1000)
 tick()
 
 
@@ -165,7 +186,7 @@ def on_filter(e):
 
 
 for b in all_list(".filter"):
-    b.addEventListener("click", on_filter)
+    on(b, "click", on_filter)
 
 
 # ---------- cart (Python list, shared with JS via localStorage) ----------
@@ -187,9 +208,9 @@ def close_cart(e=None):
     overlay.classList.remove("show")
 
 
-q("#cartOpen").addEventListener("click", open_cart)
-q("#cartClose").addEventListener("click", close_cart)
-overlay.addEventListener("click", close_cart)
+on(q("#cartOpen"), "click", open_cart)
+on(q("#cartClose"), "click", close_cart)
+on(overlay, "click", close_cart)
 
 
 def cart_total():
@@ -208,12 +229,16 @@ def render_cart():
         html += (f"<div class='ci'><div><strong>{item['name']} x{item['qty']}</strong><small>₱{item['price'] * item['qty']}</small></div><button data-act='dec' data-idx='{idx}'>−</button><button data-act='inc' data-idx='{idx}'>+</button><button class='rm' data-act='rem' data-idx='{idx}' aria-label='Remove'>✕</button></div>")
     items_el.innerHTML = html
     total_el.textContent = f"₱{cart_total()}"
-    for b in all_list(".ci button"):
-        b.addEventListener("click", on_qty)
 
 
-def on_qty(e):
-    btn = e.currentTarget
+def on_cart_click(e):
+    try:
+        t = e.target
+        btn = t.closest("button") if t is not None else None
+    except Exception:
+        btn = None
+    if btn is None:
+        return
     idx = int(btn.getAttribute("data-idx"))
     if 0 <= idx < len(cart):
         act = btn.getAttribute("data-act")
@@ -226,6 +251,9 @@ def on_qty(e):
             if cart[idx]["qty"] <= 0:
                 cart.pop(idx)
         render_cart()
+
+
+on(items_el, "click", on_cart_click)
 
 
 def add_to_cart(e):
@@ -241,11 +269,11 @@ def add_to_cart(e):
     open_cart()
     orig = btn.textContent
     btn.textContent = "Added ✓"
-    js.setTimeout(lambda o=orig: setattr(btn, "textContent", o), 900)
+    later(900, lambda o=orig: setattr(btn, "textContent", o))
 
 
 for b in all_list(".add"):
-    b.addEventListener("click", add_to_cart)
+    on(b, "click", add_to_cart)
 
 
 def checkout(e=None):
@@ -259,7 +287,7 @@ def checkout(e=None):
     close_cart()
 
 
-q("#checkoutBtn").addEventListener("click", checkout)
+on(q("#checkoutBtn"), "click", checkout)
 
 
 # ---------- order-ahead form (Python validation) ----------
@@ -280,14 +308,14 @@ def submit_order(e):
     form.reset()
 
 
-form.addEventListener("submit", submit_order)
+on(form, "submit", submit_order)
 
 
 # ---------- init ----------
 q("#year").textContent = str(datetime.now().year)
 render_cart()
 on_scroll()
-js.setTimeout(move_pill, 300)
-js.setTimeout(move_pill, 1000)
+later(300, move_pill)
+later(1000, move_pill)
 tick()
 js.window.__pyAlive = True

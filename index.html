@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
 <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/jpeg" href="logo.jpg">
 </head>
 <body>
 
@@ -293,9 +294,23 @@
 import js
 import json
 from datetime import datetime
+from pyodide.ffi import create_proxy, create_once_callable
 document = js.document
 window = js.window
 CART_KEY = "diha_cart"
+# NOTE: Pyodide destroys implicitly-created proxies after the call, so every
+# Python callback handed to the browser must be a retained create_proxy.
+_py_proxies = []
+def on(el, ev, fn):
+    p = create_proxy(fn)
+    _py_proxies.append(p)
+    el.addEventListener(ev, p)
+    return p
+def later(ms, fn):
+    p = create_once_callable(fn)
+    _py_proxies.append(p)
+    js.setTimeout(p, ms)
+    return p
 def all_list(sel):
     nodes = document.querySelectorAll(sel)
     return [nodes.item(i) for i in range(nodes.length)]
@@ -344,15 +359,15 @@ def set_active(link):
     move_pill(link)
 def toggle_menu(e=None):
     nav_links.classList.toggle("open")
-    js.setTimeout(move_pill, 50)
-q("#menuBtn").addEventListener("click", toggle_menu)
+    later(50, move_pill)
+on(q("#menuBtn"), "click", toggle_menu)
 def make_nav_handler(link):
     def handler(e=None):
         set_active(link)
         nav_links.classList.remove("open")
     return handler
 for a in all_list("#navLinks a"):
-    a.addEventListener("click", make_nav_handler(a))
+    on(a, "click", make_nav_handler(a))
 header = q("#header")
 def on_scroll(e=None):
     y = window.scrollY
@@ -375,8 +390,8 @@ def on_scroll(e=None):
         else:
             l.classList.remove("active")
     move_pill()
-window.addEventListener("scroll", on_scroll)
-window.addEventListener("resize", lambda e=None: move_pill())
+on(window, "scroll", on_scroll)
+on(window, "resize", lambda e=None: move_pill())
 try:
     end = int(js.localStorage.getItem("diha_promo_end") or 0)
 except Exception:
@@ -396,7 +411,9 @@ def tick(*args):
     q("#cdM").textContent = m
     q("#cdS").textContent = s
 js.window.__pyTick = True
-js.setInterval(tick, 1000)
+_tick_proxy = create_proxy(tick)
+_py_proxies.append(_tick_proxy)
+js.setInterval(_tick_proxy, 1000)
 tick()
 def on_filter(e):
     btn = e.currentTarget
@@ -411,7 +428,7 @@ def on_filter(e):
         sf = sub.getAttribute("data-sub")
         sub.style.display = "" if (f == "all" or f == sf) else "none"
 for b in all_list(".filter"):
-    b.addEventListener("click", on_filter)
+    on(b, "click", on_filter)
 cart = load_cart()
 drawer = q("#cartDrawer")
 overlay = q("#cartOverlay")
@@ -424,9 +441,9 @@ def open_cart(e=None):
 def close_cart(e=None):
     drawer.classList.remove("show")
     overlay.classList.remove("show")
-q("#cartOpen").addEventListener("click", open_cart)
-q("#cartClose").addEventListener("click", close_cart)
-overlay.addEventListener("click", close_cart)
+on(q("#cartOpen"), "click", open_cart)
+on(q("#cartClose"), "click", close_cart)
+on(overlay, "click", close_cart)
 def cart_total():
     return sum(i["price"] * i["qty"] for i in cart)
 def render_cart():
@@ -441,10 +458,14 @@ def render_cart():
         html += (f"<div class='ci'><div><strong>{item['name']} x{item['qty']}</strong><small>₱{item['price'] * item['qty']}</small></div><button data-act='dec' data-idx='{idx}'>−</button><button data-act='inc' data-idx='{idx}'>+</button><button class='rm' data-act='rem' data-idx='{idx}' aria-label='Remove'>✕</button></div>")
     items_el.innerHTML = html
     total_el.textContent = f"₱{cart_total()}"
-    for b in all_list(".ci button"):
-        b.addEventListener("click", on_qty)
-def on_qty(e):
-    btn = e.currentTarget
+def on_cart_click(e):
+    try:
+        t = e.target
+        btn = t.closest("button") if t is not None else None
+    except Exception:
+        btn = None
+    if btn is None:
+        return
     idx = int(btn.getAttribute("data-idx"))
     if 0 <= idx < len(cart):
         act = btn.getAttribute("data-act")
@@ -457,6 +478,7 @@ def on_qty(e):
             if cart[idx]["qty"] <= 0:
                 cart.pop(idx)
         render_cart()
+on(items_el, "click", on_cart_click)
 def add_to_cart(e):
     btn = e.currentTarget
     name = btn.getAttribute("data-name")
@@ -470,9 +492,9 @@ def add_to_cart(e):
     open_cart()
     orig = btn.textContent
     btn.textContent = "Added ✓"
-    js.setTimeout(lambda o=orig: setattr(btn, "textContent", o), 900)
+    later(900, lambda o=orig: setattr(btn, "textContent", o))
 for b in all_list(".add"):
-    b.addEventListener("click", add_to_cart)
+    on(b, "click", add_to_cart)
 def checkout(e=None):
     if not cart:
         js.alert("Pili sa ug sisig! 🍳")
@@ -482,7 +504,7 @@ def checkout(e=None):
     cart.clear()
     render_cart()
     close_cart()
-q("#checkoutBtn").addEventListener("click", checkout)
+on(q("#checkoutBtn"), "click", checkout)
 form = q("#orderForm")
 def submit_order(e):
     e.preventDefault()
@@ -496,12 +518,12 @@ def submit_order(e):
     who = name if name else "suki"
     note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
     form.reset()
-form.addEventListener("submit", submit_order)
+on(form, "submit", submit_order)
 q("#year").textContent = str(datetime.now().year)
 render_cart()
 on_scroll()
-js.setTimeout(move_pill, 300)
-js.setTimeout(move_pill, 1000)
+later(300, move_pill)
+later(1000, move_pill)
 tick()
 js.window.__pyAlive = True
 </script>
