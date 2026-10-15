@@ -1,33 +1,98 @@
-# 🐍 Sisig Mo Diha — 100% PyScript (Python in the browser)
-# Menu filter, cart, promo countdown, copy-code, order form, reveal, nav.
+# 🐍 Sisig Mo Diha — PyScript (Python in the browser)
+# All interactive functionality runs here: nav pill, scroll-spy, reveal,
+# promo countdown, menu filter, cart, checkout, order form, year.
 import js
+import json
 from datetime import datetime
 
 document = js.document
 window = js.window
+CART_KEY = "diha_cart"
+
 
 def all_list(sel):
     nodes = document.querySelectorAll(sel)
     return [nodes.item(i) for i in range(nodes.length)]
 
+
 def q(sel):
     return document.querySelector(sel)
 
-# ---------- mobile menu ----------
+
+def load_cart():
+    try:
+        raw = js.localStorage.getItem(CART_KEY)
+        if not raw:
+            return []
+        data = json.loads(str(raw))
+        clean = []
+        for it in data:
+            try:
+                clean.append({"name": str(it["name"]), "price": int(it["price"]), "qty": max(1, int(it.get("qty", 1)))})
+            except Exception:
+                continue
+        return clean
+    except Exception:
+        return []
+
+
+def save_cart():
+    try:
+        js.localStorage.setItem(CART_KEY, json.dumps(cart))
+    except Exception:
+        pass
+
+
+# ---------- mobile menu + sliding red pill ----------
 nav_links = q("#navLinks")
+nav_pill = q("#navPill")
+
+
+def move_pill(target=None):
+    try:
+        if target is None:
+            target = q(".nav-links a.active")
+        if not target or not nav_pill:
+            return
+        nav_links.classList.add("has-pill")
+        nav_pill.style.left = f"{target.offsetLeft}px"
+        nav_pill.style.top = f"{target.offsetTop}px"
+        nav_pill.style.width = f"{target.offsetWidth}px"
+        nav_pill.style.height = f"{target.offsetHeight}px"
+        nav_pill.style.opacity = "1"
+    except Exception:
+        pass
+
+
+def set_active(link):
+    for l in all_list(".nav-links a"):
+        l.classList.remove("active")
+    link.classList.add("active")
+    move_pill(link)
+
 
 def toggle_menu(e=None):
     nav_links.classList.toggle("open")
+    js.setTimeout(move_pill, 50)
+
 
 q("#menuBtn").addEventListener("click", toggle_menu)
 
-for a in all_list("#navLinks a"):
-    def _close(e=None):
+
+def make_nav_handler(link):
+    def handler(e=None):
+        set_active(link)
         nav_links.classList.remove("open")
-    a.addEventListener("click", _close)
+    return handler
+
+
+for a in all_list("#navLinks a"):
+    a.addEventListener("click", make_nav_handler(a))
+
 
 # ---------- scroll: header, reveal, active nav ----------
 header = q("#header")
+
 
 def on_scroll(e=None):
     y = window.scrollY
@@ -49,22 +114,12 @@ def on_scroll(e=None):
             l.classList.add("active")
         else:
             l.classList.remove("active")
+    move_pill()
+
 
 window.addEventListener("scroll", on_scroll)
+window.addEventListener("resize", lambda e=None: move_pill())
 
-# ---------- copy promo code (Python!) ----------
-copyBtn = q("#copyCode")
-if copyBtn:
-    def copy_code(e):
-        btn = e.currentTarget
-        code = btn.textContent.strip()
-        try:
-            js.navigator.clipboard.writeText(code)
-        except Exception:
-            pass
-        btn.textContent = "Copied ✓"
-        js.setTimeout(lambda: setattr(btn, "textContent", code), 1200)
-    copyBtn.addEventListener("click", copy_code)
 
 # ---------- promo countdown (Python timer) ----------
 try:
@@ -78,6 +133,7 @@ if not end or end < js.Date.now():
     except Exception:
         pass
 
+
 def tick(*args):
     d = max(0, end - int(js.Date.now()))
     h = str(d // 3600000).zfill(2)
@@ -87,8 +143,11 @@ def tick(*args):
     q("#cdM").textContent = m
     q("#cdS").textContent = s
 
+
+js.window.__pyTick = True
 js.setInterval(tick, 1000)
 tick()
+
 
 # ---------- menu filter (Python) ----------
 def on_filter(e):
@@ -100,63 +159,74 @@ def on_filter(e):
     for dish in all_list(".dish"):
         cats = (dish.getAttribute("data-cat") or "").split(" ")
         dish.style.display = "" if (f == "all" or f in cats) else "none"
+    for sub in all_list(".menu-sub"):
+        sf = sub.getAttribute("data-sub")
+        sub.style.display = "" if (f == "all" or f == sf) else "none"
+
 
 for b in all_list(".filter"):
     b.addEventListener("click", on_filter)
 
-# ---------- cart (Python list) ----------
-cart = []
+
+# ---------- cart (Python list, shared with JS via localStorage) ----------
+cart = load_cart()
 drawer = q("#cartDrawer")
 overlay = q("#cartOverlay")
 items_el = q("#cartItems")
 total_el = q("#cartTotal")
 count_el = q("#cartCount")
 
+
 def open_cart(e=None):
     drawer.classList.add("show")
     overlay.classList.add("show")
+
 
 def close_cart(e=None):
     drawer.classList.remove("show")
     overlay.classList.remove("show")
 
+
 q("#cartOpen").addEventListener("click", open_cart)
 q("#cartClose").addEventListener("click", close_cart)
 overlay.addEventListener("click", close_cart)
 
+
 def cart_total():
     return sum(i["price"] * i["qty"] for i in cart)
 
+
 def render_cart():
     count_el.textContent = str(sum(i["qty"] for i in cart))
+    save_cart()
     if not cart:
         items_el.innerHTML = "<p class='empty'>Wala pa kay order — pili sa sa menu! 🍳</p>"
         total_el.textContent = "₱0"
         return
     html = ""
     for idx, item in enumerate(cart):
-        html += (
-            f"<div class='ci'><div><strong>{item['name']} x{item['qty']}</strong>"
-            f"<small>₱{item['price'] * item['qty']}</small></div>"
-            f"<button data-act='dec' data-idx='{idx}'>−</button>"
-            f"<button data-act='inc' data-idx='{idx}'>+</button></div>"
-        )
+        html += (f"<div class='ci'><div><strong>{item['name']} x{item['qty']}</strong><small>₱{item['price'] * item['qty']}</small></div><button data-act='dec' data-idx='{idx}'>−</button><button data-act='inc' data-idx='{idx}'>+</button><button class='rm' data-act='rem' data-idx='{idx}' aria-label='Remove'>✕</button></div>")
     items_el.innerHTML = html
     total_el.textContent = f"₱{cart_total()}"
     for b in all_list(".ci button"):
         b.addEventListener("click", on_qty)
 
+
 def on_qty(e):
     btn = e.currentTarget
     idx = int(btn.getAttribute("data-idx"))
     if 0 <= idx < len(cart):
-        if btn.getAttribute("data-act") == "inc":
+        act = btn.getAttribute("data-act")
+        if act == "inc":
             cart[idx]["qty"] += 1
+        elif act == "rem":
+            cart.pop(idx)
         else:
             cart[idx]["qty"] -= 1
             if cart[idx]["qty"] <= 0:
                 cart.pop(idx)
         render_cart()
+
 
 def add_to_cart(e):
     btn = e.currentTarget
@@ -169,11 +239,14 @@ def add_to_cart(e):
         cart.append({"name": name, "price": price, "qty": 1})
     render_cart()
     open_cart()
+    orig = btn.textContent
     btn.textContent = "Added ✓"
-    js.setTimeout(lambda: setattr(btn, "textContent", "Add +"), 900)
+    js.setTimeout(lambda o=orig: setattr(btn, "textContent", o), 900)
+
 
 for b in all_list(".add"):
     b.addEventListener("click", add_to_cart)
+
 
 def checkout(e=None):
     if not cart:
@@ -185,10 +258,13 @@ def checkout(e=None):
     render_cart()
     close_cart()
 
+
 q("#checkoutBtn").addEventListener("click", checkout)
+
 
 # ---------- order-ahead form (Python validation) ----------
 form = q("#orderForm")
+
 
 def submit_order(e):
     e.preventDefault()
@@ -203,15 +279,15 @@ def submit_order(e):
     note.textContent = f"Salamat {who}! 🔥 Nadawat na imong {otype} order — tawagan ka namo. (confirmed with Python 🐍)"
     form.reset()
 
+
 form.addEventListener("submit", submit_order)
+
 
 # ---------- init ----------
 q("#year").textContent = str(datetime.now().year)
 render_cart()
 on_scroll()
+js.setTimeout(move_pill, 300)
+js.setTimeout(move_pill, 1000)
 tick()
-
-status = q("#pyStatus")
-if status:
-    status.textContent = "🐍 Powered by Python (PyScript) ✅ — cart, filter & promos run on Python"
-    js.setTimeout(lambda: status.classList.add("hide"), 3000)
+js.window.__pyAlive = True
